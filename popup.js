@@ -64,3 +64,18 @@ checkLoginButton.addEventListener('click', function(){
 })
 
 loginOutputNode.innerText = window.origin
+
+const testXhrButton = document.getElementById('test-xhr')
+const xhrOutputNode = document.getElementById('test-xhr-output')
+
+testXhrButton.addEventListener('click', function(){
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://www.google.com", true)
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            xhrOutputNode.innerText = xhr.responseText
+        }
+    }
+    xhr.send()
+})
+
