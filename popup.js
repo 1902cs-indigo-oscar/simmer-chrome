@@ -17,3 +17,50 @@ chrome.runtime.onMessage.addListener(
         }
         return true
     })
+
+const loginForm = document.getElementById('auth-form')
+const usernameInput = document.getElementById('username')
+const passwordInput = document.getElementById('password')
+const loginOutputNode = document.getElementById('login-status-output')
+
+loginForm.addEventListener('submit', function(event){
+    event.preventDefault()
+    fetch('https://mafia.brook.li/api/login', {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: usernameInput.value,
+            password: passwordInput.value
+        })
+    }).then(response => {
+        response.json().then(data => {
+            loginOutputNode.innerText = 'Login request: ' + data.outcome
+        })
+    }).catch(error => {
+        loginOutputNode.innerText = 'Login request failed: ' + error
+    })
+    loginForm.reset()
+})
+
+const checkLoginButton = document.getElementById('check-login-btn')
+
+checkLoginButton.addEventListener('click', function(){
+    fetch('https://mafia.brook.li/api/loginstatus', {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include'
+    }).then(response => {
+        response.json().then(data => {
+            loginOutputNode.innerText = 'Login status request: ' + data.loginStatus
+        })
+
+    }).catch(error => {
+        loginOutputNode.innerText = 'Login status request failed:' + error
+    })
+})
+
+loginOutputNode.innerText = window.origin

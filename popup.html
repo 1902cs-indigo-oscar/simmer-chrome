@@ -3,8 +3,21 @@
         <script src="popup.js" defer></script>
     </head>
     <body>
-        <button id="run-script-btn" type="button">Run Script</button>
-        <p>Scraped content:</p>
-        <p id="scraped-output">Content will appear here</p>
+        <div>
+            <button id="run-script-btn" type="button">Run Script</button>
+            <p>Scraped content:</p>
+            <p id="scraped-output">Content will appear here</p>
+        </div>
+        <form id="auth-form">
+            <input type="text" id="username" name="username" />
+            <label for="username">Username</label>
+            <input type="password" id="password" name="password" />
+            <label for="password">Password</label>
+            <button type="submit">Submit</button>
+        </form>
+        <div>
+            <button type="button" id="check-login-btn">Check login status</button>
+            <p id="login-status-output">Login status will appear here</p>
+        </div>
     </body>
 </html>
